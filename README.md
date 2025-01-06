@@ -93,7 +93,8 @@ Tổng độ dài các đường chéo ngắn nhất là: 3.41421
 
 3. Chạy chương trình:
    ```bash
-   ./bai16
+   ./bai16   or
+   bash bai16
    ```
 
 4. Nhập các tọạ độ của đa giác theo hướng dẫn.
@@ -103,7 +104,8 @@ Tổng độ dài các đường chéo ngắn nhất là: 3.41421
 ```
 PTTKGT/
 ├── Bai16.cpp   # Tệp mã nguồn chính
-├── README.md           # Tài liệu hướng dẫn
+├── bai16       # Thư mục chứa chương trình
+├── README.md   # Tài liệu hướng dẫn
 ```
 
 
