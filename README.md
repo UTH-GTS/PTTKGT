@@ -1,112 +1,109 @@
-# PTTKGT
-Phan tich thiet ke va giai thuat
-# Bài toán Triangulation của Đa giác Lồi
+# Phân Chia Đa Giác Lồi Tối Đa Chiều Dài Đường Chéo
 
-## Mô tả bài toán
-Cho một đa giác lồi N đỉnh. Bằng các đường chéo không cắt nhau, ta có thể chia đa giác thành N−2 tam giác. Hãy xác định cách chia có tổng các đường chéo ngắn nhất.
+Dự án này triển khai thuật toán tìm đường chéo ngắn nhất để chia một đa giác lồi với `N` đỉnh thành `N-2` tam giác sao cho tổng độ dài các đường chéo là nhỏ nhất. Chương trình được viết bằng C++ và sử dụng kỹ thuật lập trình động để giải quyết vấn đề.
 
----
+## Đặc điểm
 
-## Ý tưởng giải bài toán
+- Tính tổng chi phí đường chéo tối thiểu khi chia đa giác.
+- Hỗ trợ đa giác lồi với bất kỳ số lượng đỉnh.
+- Tính toán tổng độ dài đường chéo cho phương án tối ưu.
 
-### Biểu diễn bài toán
-- Đa giác lồi được biểu diễn bằng \( N \) đỉnh, đánh số từ \( 1 \) đến \( N \).
-- Mỗi cách chia đa giác thành tam giác có thể được biểu diễn bằng tập hợp các đường chéo không cắt nhau.
+## Đầu vào
 
-### Mục tiêu
-- Tính tổng độ dài của các đường chéo được sử dụng.
-- Tìm cách chia sao cho tổng độ dài này là nhỏ nhất.
+1. Số đỉnh của đa giác (`N`).
+2. Tọạ độ của từng đỉnh theo thứ tự kim đồng hồ hoặc ngược chiều kim đồng hồ.
 
----
+## Đầu ra
 
-## Quy hoạch động
+Chương trình xuất ra tổng độ dài đường chéo nhỏ nhất cần thiết để chia đa giác.
 
-### Định nghĩa
-- Đặt \( dp[i][j] \) là **chi phí tối thiểu** để chia nhỏ phần đa giác từ đỉnh \( i \) đến \( j \).
+## Ví dụ
 
-### Công thức truy hồi
-\[
-dp[i][j] = \min_{k=i+1}^{j-1} \left( dp[i][k] + dp[k][j] + \text{cost}(i, k, j) \right)
-\]
-Trong đó:
-- \( \text{cost}(i, k, j) \): độ dài của đường chéo giữa \( i \) và \( j \).
+### Đầu vào
+```
+Nhập số đỉnh của đa giác: 4
+Nhập tọạ độ của các đỉnh:
+0 0
+1 0
+1 1
+0 1
+```
 
----
-
-## Cách tính độ dài đường chéo
-- Nếu tọa độ các đỉnh của đa giác là \( (x_i, y_i) \), thì độ dài đường chéo giữa hai đỉnh \( i \) và \( j \) là:
-\[
-\text{distance}(i, j) = \sqrt{(x_j - x_i)^2 + (y_j - y_i)^2}
-\]
-
----
+### Đầu ra
+```
+Tổng độ dài các đường chéo ngắn nhất là: 3.41421
+```
 
 ## Thuật toán
-1. **Khởi tạo:**
-   - \( dp[i][j] = 0 \) nếu \( j - i < 2 \) (không thể tạo tam giác).
 
-2. **Quá trình duyệt:**
-   - Duyệt qua các đoạn \( dp[i][j] \) với \( j - i \geq 2 \), tính giá trị tối ưu dựa trên công thức truy hồi.
+### Ý tưởng
 
-3. **Kết quả:**
-   - Trả về \( dp[1][N] \), chi phí tối thiểu cho toàn bộ đa giác.
+1. **Lập trình động:**
+   - Sử dụng mảng 2D `dp[i][j]` để lưu chi phí nhỏ nhất khi chia đa giác từ đỉnh `i` đến `j`.
+   - Với mỗi đa giác con (định từ `i` đến `j`), xét mỗi đường chéo `k` nằm giữa `i` và `j`.
+   - Tính chi phí dài đường chéo và tổng chi phí của hai đa giác con chia bởi đường chéo.
 
----
+2. **Công thức quy hoạch:**
+   - Với mỗi đa giác con từ đỉnh `i` đến `j`, công thức:
+     ```
+     dp[i][j] = min(dp[i][k] + dp[k][j] + cost(i, j, k)) 
+                 for all i < k < j
+     ```
+   - `cost(i, j, k)`: Chi phí tạo tam giác giữa các đỉnh `i, j, k`.
 
-## Triển khai thuật toán (C++)
+3. **Khởi tạo:**
+   - Nếu `j - i < 2` (chỉ có 2 đỉnh hoặc ít hơn), không thể chia được, do đó `dp[i][j] = 0`.
 
-```cpp
-#include <iostream>
-#include <vector>
-#include <cmath>
-#include <limits>
+4. **Kết quả:**
+   - Giá trị cuối cùng `dp[0][N-1]` là chi phí nhỏ nhất để chia toàn bộ đa giác.
 
-using namespace std;
+## Triển khai
 
-// Hàm tính khoảng cách giữa hai điểm
-double distance(pair<double, double> a, pair<double, double> b) {
-    return sqrt((a.first - b.first) * (a.first - b.first) + (a.second - b.second) * (a.second - b.second));
-}
+1. **Cài đặt tọn khoảng cách:**
+   - Khoảng cách giữa hai điểm `p1` và `p2` tính bằng công thức Euclid:
+     ```
+     distance = sqrt((x1 - x2)^2 + (y1 - y2)^2)
+     ```
 
-// Hàm tính chi phí của tam giác
-double cost(int i, int j, int k, const vector<pair<double, double>> &points) {
-    return distance(points[i], points[j]) + distance(points[j], points[k]) + distance(points[k], points[i]);
-}
+2. **Tính chi phí tam giác:**
+   - Tam giác có 3 đỉnh `i, j, k` có chi phí:
+     ```
+     cost(i, j, k) = distance(i, j) + distance(j, k) + distance(k, i)
+     ```
 
-// Hàm tìm chi phí tối thiểu để chia đa giác
-double minTriangulationCost(const vector<pair<double, double>> &points) {
-    int n = points.size();
-    vector<vector<double>> dp(n, vector<double>(n, 0));
+3. **Duyệt tất cả các đỉnh:**
+   - Xét tất cả các cặp đỉnh `i` và `j`, với khoảng cách tăng dần (từ 2 đến `N-1`).
+   - Tính `dp[i][j]` bằng cách thử mọi đường chéo `k` nằm giữa `i` và `j`.
 
-    // Duyệt qua các độ dài đoạn (j - i)
-    for (int length = 2; length < n; ++length) {
-        for (int i = 0; i < n - length; ++i) {
-            int j = i + length;
-            dp[i][j] = numeric_limits<double>::infinity();
-            // Duyệt qua tất cả các điểm k nằm giữa i và j
-            for (int k = i + 1; k < j; ++k) {
-                dp[i][j] = min(dp[i][j], dp[i][k] + dp[k][j] + cost(i, k, j, points));
-            }
-        }
-    }
-    return dp[0][n - 1]; // Kết quả cuối cùng
-}
+4. **Kết quả cuối:**
+   - Giá trị tại `dp[0][N-1]` chính là tổng chi phí đường chéo nhỏ nhất.
 
-int main() {
-    // Nhập số đỉnh và tọa độ các đỉnh của đa giác
-    int n;
-    cout << "Nhập số đỉnh của đa giác: ";
-    cin >> n;
+## Cách chạy chương trình
 
-    vector<pair<double, double>> points(n);
-    cout << "Nhập tọa độ các đỉnh (x, y):" << endl;
-    for (int i = 0; i < n; ++i) {
-        cin >> points[i].first >> points[i].second;
-    }
+1. Clone repository này:
+   ```bash
+   git clone https://github.com/UTH-GTS/PTTKGT.git
+   cd PTTKGT
+   ```
 
-    // Tính chi phí tối thiểu
-    double result = minTriangulationCost(points);
-    cout << "Tổng độ dài tối thiểu của các đường chéo: " << result << endl;
+2. Biên dịch chương trình:
+   ```bash
+   g++ -o Bai16.cpp bai16 -std=c++11
+   ```
 
-    return 0;
-}
+3. Chạy chương trình:
+   ```bash
+   ./bai16
+   ```
+
+4. Nhập các tọạ độ của đa giác theo hướng dẫn.
+
+## Cấu trúc thư mục
+
+```
+PTTKGT/
+├── Bai16.cpp   # Tệp mã nguồn chính
+├── README.md           # Tài liệu hướng dẫn
+```
+
+
