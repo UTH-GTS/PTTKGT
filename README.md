@@ -3,7 +3,7 @@ Phan tich thiet ke va giai thuat
 # Bài toán Triangulation của Đa giác Lồi
 
 ## Mô tả bài toán
-Cho một đa giác lồi với \( N \) đỉnh. Bằng các đường chéo không cắt nhau, chúng ta có thể chia đa giác thành \( N - 2 \) tam giác. Nhiệm vụ là tìm cách chia sao cho tổng độ dài các đường chéo được sử dụng là **nhỏ nhất**.
+Cho một đa giác lồi N đỉnh. Bằng các đường chéo không cắt nhau, ta có thể chia đa giác thành N−2 tam giác. Hãy xác định cách chia có tổng các đường chéo ngắn nhất.
 
 ---
 
