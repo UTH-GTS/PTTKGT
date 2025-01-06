@@ -93,8 +93,7 @@ Tổng độ dài các đường chéo ngắn nhất là: 3.41421
 
 3. Chạy chương trình:
    ```bash
-   ./bai16   or
-   bash bai16
+   ./bai16
    ```
 
 4. Nhập các tọạ độ của đa giác theo hướng dẫn.
