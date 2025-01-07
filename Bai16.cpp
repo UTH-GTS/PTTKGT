@@ -52,18 +52,33 @@ double minTriangulation(vector<pair<double, double>> &points, vector<vector<int>
     return dp[0][n - 1];
 }
 
-// Hàm truy vết các đường chéo từ bảng trace
-void printDiagonals(int i, int j, vector<vector<int>> &trace)
+// Hàm truy vết các đường chéo từ bảng trace và liệt kê tất cả tam giác
+void printDiagonals(int i, int j, vector<vector<int>> &trace, const vector<pair<double, double>> &points, double &individualSum)
 {
     if (j - i < 2)
         return; // Không có đường chéo trong đoạn nhỏ hơn 3 đỉnh
 
     int k = trace[i][j]; // Đỉnh trung gian tốt nhất
-    cout << "Đường chéo: (" << i << ", " << k << ") và (" << k << ", " << j << ")\n";
+
+    // Tính độ dài các đường chéo của tam giác
+    double len1 = distance(points[i], points[k]);
+    double len2 = distance(points[k], points[j]);
+    double len3 = distance(points[i], points[j]);
+
+    // In thông tin tam giác
+    cout << "Tam giác: (" << char('A' + i) << " - " << char('A' + k) << " - " << char('A' + j) << ")\n";
+    cout << "Đường chéo: (" << char('A' + i) << ", " << char('A' + k) << ") = " << len1
+         << ", (" << char('A' + k) << ", " << char('A' + j) << ") = " << len2
+         << ", (" << char('A' + i) << ", " << char('A' + j) << ") = " << len3 << "\n";
+
+    // Tổng đường chéo của tam giác này
+    double triangleTotal = len1 + len2 + len3;
+    individualSum += triangleTotal;
+    cout << "Tổng độ dài các đường chéo của tam giác: " << triangleTotal << "\n\n";
 
     // Truy vết tiếp các đoạn trái và phải
-    printDiagonals(i, k, trace);
-    printDiagonals(k, j, trace);
+    printDiagonals(i, k, trace, points, individualSum);
+    printDiagonals(k, j, trace, points, individualSum);
 }
 
 int main()
@@ -83,7 +98,7 @@ int main()
     cout << "Nhập tọa độ các đỉnh (x y) theo thứ tự ngược chiều kim đồng hồ:\n";
     for (int i = 0; i < n; ++i)
     {
-        cout << "Đỉnh " << i + 1 << ": ";
+        cout << "Đỉnh " << char('A' + i) << " (x y): ";
         cin >> points[i].first >> points[i].second;
     }
 
@@ -93,12 +108,14 @@ int main()
     // Bước 2: Gọi hàm tính tổng độ dài nhỏ nhất
     double result = minTriangulation(points, trace);
 
-    // Bước 3: Xuất kết quả tổng độ dài
-    cout << "Tổng độ dài nhỏ nhất của các đường chéo: " << result << endl;
+    // Bước 3: Xuất các đường chéo chi tiết và tổng các tam giác
+    cout << "Danh sách các tam giác và đường chéo chi tiết: \n";
+    double individualSum = 0;
+    printDiagonals(0, n - 1, trace, points, individualSum);
 
-    // Bước 4: Xuất các đường chéo chi tiết
-    cout << "Danh sách các đường chéo: \n";
-    printDiagonals(0, n - 1, trace);
+    // Bước 4: Xuất tổng độ dài nhỏ nhất và so sánh
+    cout << "Công thức: dp[i][j] = min(dp[i][k] + dp[k][j] + distance(i, k) + distance(k, j) + distance(i, j))\n";
+    cout << "Tổng độ dài nhỏ nhất của các đường chéo (dp[0][n-1]): " << result << "\n";
 
     return 0;
 }
