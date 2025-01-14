@@ -35,20 +35,23 @@ Chương trình được viết bằng C++ nhằm tìm cách chia một đa giá
 ---
 ## **Ví dụ**
 # Đầu vào:
+   ``bash
    Nhap so dinh cua da giac: 4
    Nhap toa do cac dinh (x, y):
    Dinh 1: 0 0
    Dinh 2: 1 0
    Dinh 3: 1 1
    Dinh 4: 0 1
-
+   ```
 
 # Đầu ra:
 
+   ```bash
    Tong do dai nho nhat: 2.83
    Cac duong cheo toi uu:
    Noi dinh 1 voi dinh 3
    Noi dinh 3 voi dinh 4
+   ```
 
 
 # Ghi chú
