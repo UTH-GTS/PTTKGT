@@ -35,7 +35,7 @@ Chương trình được viết bằng C++ nhằm tìm cách chia một đa giá
 ---
 ## **Ví dụ**
 # Đầu vào:
-   ``bash
+   ```bash
    Nhap so dinh cua da giac: 4
    Nhap toa do cac dinh (x, y):
    Dinh 1: 0 0
