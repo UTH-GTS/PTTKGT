@@ -25,8 +25,7 @@ Chương trình được viết bằng C++ nhằm tìm cách chia một đa giá
 
    ```bash
    git clone https://github.com/UTH-GTS/PTTKGT.git
-   cd PTTKGT
-   cd output
+   cd PTTKGT/output
    ./Bai16
    ```
 
