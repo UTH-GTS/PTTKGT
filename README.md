@@ -26,6 +26,7 @@ Chương trình được viết bằng C++ nhằm tìm cách chia một đa giá
    ```bash
    cd output
    ./Bai16
+   ```
 
 
 
