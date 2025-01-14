@@ -24,6 +24,8 @@ Chương trình được viết bằng C++ nhằm tìm cách chia một đa giá
 ## **Hướng dẫn sử dụng**
 
    ```bash
+   git clone https://github.com/UTH-GTS/PTTKGT.git
+   cd PTTKGT
    cd output
    ./Bai16
    ```
