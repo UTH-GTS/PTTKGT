@@ -76,8 +76,7 @@ void TruyVet(int i, int j)
     if (j - i >= 3)
     {
         int k = H[i][j];
-        cout << "Noi dinh " << i << " voi dinh " << k << endl;
-        cout << "Noi dinh " << k << " voi dinh " << j << endl;
+        cout << "Noi dinh " << i << " voi k = " << k << " va noi k = " << k << " voi dinh " << j << " => L[" << i << "]" << "[" << j << "]" << endl;
         TruyVet(i, k);
         TruyVet(k, j);
     }
@@ -107,7 +106,7 @@ int main()
     QHD();
 
     // In kết quả
-    cout << fixed << setprecision(2) << "Tong do dai nho nhat: " << L[1][n] << endl;
+    cout << fixed << setprecision(2) << "Tong do dai nho nhat " << "L[1]" << "[" << n << "]" << ": " << L[1][n] << endl;
     cout << "Cac duong cheo toi uu:" << endl;
     TruyVet(1, n);
 
