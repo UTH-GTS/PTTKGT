@@ -77,9 +77,9 @@ void TruyVet(int i, int j)
     {
         int k = H[i][j];
         cout << "Noi dinh " << i << " voi dinh " << k << endl;
-        cout << "Noi dinh " << k << " voi dinh " << j << endl;
+        cout << "Noi dinh " << k - 1 << " voi dinh " << j << endl;
         TruyVet(i, k);
-        TruyVet(k, j);
+        TruyVet(k - 1, j);
     }
 }
 
