@@ -46,9 +46,11 @@ Chương trình được viết bằng C++ nhằm tìm cách chia một đa giá
 # Đầu ra:
 
    ```bash
-   Tong do dai nho nhat: 2.83
+   Tong do dai nho nhat: 1.41
    Cac duong cheo toi uu:
-   Noi dinh 1 voi dinh 3
+   Noi dinh 1 voi dinh 2
+   Noi dinh 2 voi dinh 4
+   Noi dinh 2 voi dinh 3
    Noi dinh 3 voi dinh 4
    ```
 
