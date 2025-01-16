@@ -73,7 +73,7 @@ void QHD()
 // Hàm truy vết kết quả
 void TruyVet(int i, int j)
 {
-    if (j - i >= 2)
+    if (j - i >= 3)
     {
         int k = H[i][j];
         cout << "Noi dinh " << i << " voi dinh " << k << endl;
